@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4d9ad0df4983d4db2c6278e3cd7051, type: 3}
+  m_Name: potion of healing
+  m_EditorClassIdentifier: 
+  name: potion of healing
+  tile: {fileID: 0}
+  type: 3
+  actionType: 1
+  range: {x: 5, y: 4}
+  model: {fileID: -8679921383154817045, guid: bdf4568c4ce751b49b55beeee7279e39, type: 3}
+  tilt: 1
+  stackAmount: 5
+  image: {fileID: 21300000, guid: 01d814d76bf8137408eb1135502d86f9, type: 3}
+  damage: 0
+  knockBack: 0
+  distance: 0
+  fireRate: 0
+  magSize: 0
+  reloadSpeed: 0
+  effect: 1
+  useTime: 3
+  severity: 50
+  currencyType: 0
+  Value: 0
