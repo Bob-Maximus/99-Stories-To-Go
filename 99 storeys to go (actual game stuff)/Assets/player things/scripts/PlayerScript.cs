@@ -6,6 +6,7 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody rb;
     private CurrentHealth CurrentHealth;
     private RaycastHit rayHit;
+    private EnterableThings sceneManager;
     Animator anim;
 
     private bool isCrouched = false;
@@ -28,6 +29,7 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         CurrentHealth = GetComponent<CurrentHealth>();
         anim = GetComponentInChildren<Animator>();
+        sceneManager = GameObject.Find("SceneManager").GetComponent<EnterableThings>();
 
         CurrentHealth.currentHealth = playerData.maxHealth;
     }
@@ -345,6 +347,14 @@ public class PlayerScript : MonoBehaviour
         if (isMoving == false && IsGrounded() && !Aim() && !Crouch())
         {
             PlayAnimation("idle breathing");
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "scene swich")
+        {
+            sceneManager.SwichScene(collision);
         }
     }
 }

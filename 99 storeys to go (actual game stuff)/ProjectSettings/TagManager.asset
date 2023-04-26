@@ -10,6 +10,7 @@ TagManager:
   - pick up able object
   - inventory manager
   - inventory slot
+  - scene swich
   layers:
   - Default
   - TransparentFX
