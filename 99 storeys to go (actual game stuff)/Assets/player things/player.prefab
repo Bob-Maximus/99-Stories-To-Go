@@ -118,6 +118,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2040703181594769578}
   gunPos: {fileID: 1215092442}
   upperBodyCol: {fileID: 4855907058221311440}
+  defaultAnimController: {fileID: 0}
 --- !u!136 &4855907058221311440
 CapsuleCollider:
   m_ObjectHideFlags: 0
