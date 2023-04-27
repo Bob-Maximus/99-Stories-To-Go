@@ -6,7 +6,6 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody rb;
     private CurrentHealth CurrentHealth;
     private RaycastHit rayHit;
-    private EnterableThings sceneManager;
     Animator anim;
 
     private bool isCrouched = false;
@@ -29,7 +28,6 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         CurrentHealth = GetComponent<CurrentHealth>();
         anim = GetComponentInChildren<Animator>();
-        sceneManager = GameObject.Find("SceneManager").GetComponent<EnterableThings>();
 
         CurrentHealth.currentHealth = playerData.maxHealth;
     }
@@ -129,7 +127,9 @@ public class PlayerScript : MonoBehaviour
 
     private bool IsGrounded()
     {
-        if (Vector3.Distance(rayHit.point, groundCheck.position) <= 0.1)
+        Physics.Raycast(transform.position, -transform.up, out rayHit);
+
+        if (Vector3.Distance(rayHit.point, groundCheck.position) <= 0.1 && rayHit.collider.gameObject.layer == 3)
         {
             return true;
         }
@@ -324,8 +324,6 @@ public class PlayerScript : MonoBehaviour
 
     private void GeneralProcceses()
     {
-        Physics.Raycast(transform.position, -transform.up, out rayHit);
-
         timeSinceLastShot += Time.deltaTime;
 
         Mathf.Clamp(rb.velocity.x, playerData.speed, 0);
@@ -350,11 +348,12 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "scene swich")
+        if (other.gameObject.tag == "scene swich")
         {
-            sceneManager.SwichScene(collision);
+            var sceneManager = GameObject.FindGameObjectsWithTag("scene manager")[0].GetComponent<EnterableThings>();
+            sceneManager.SwichScene(other);
         }
     }
 }

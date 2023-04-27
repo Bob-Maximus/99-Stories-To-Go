@@ -2501,9 +2501,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1086359844}
+  - component: {fileID: 1086359845}
   m_Layer: 0
   m_Name: SceneManager
-  m_TagString: Untagged
+  m_TagString: scene manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2523,6 +2524,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1086359845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086359843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14b8679bcf3d814ababf6e7d09fc235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelData: {fileID: 11400000, guid: 5dda35bbdbeaf5246b503b7596b49571, type: 2}
 --- !u!1 &1111838135
 GameObject:
   m_ObjectHideFlags: 0
@@ -4807,11 +4821,6 @@ PrefabInstance:
       propertyPath: inventoryManager
       value: 
       objectReference: {fileID: 1134469329}
-    - target: {fileID: 2040703182165233017, guid: aa4f1ba608ffa9345a59ba797f26efa5,
-        type: 3}
-      propertyPath: defaultAnimController
-      value: 
-      objectReference: {fileID: 9100000, guid: ed7fc3987c73a2f4a82f2c69ad991028, type: 2}
     - target: {fileID: 2040703182165233019, guid: aa4f1ba608ffa9345a59ba797f26efa5,
         type: 3}
       propertyPath: m_RootOrder
@@ -4820,12 +4829,12 @@ PrefabInstance:
     - target: {fileID: 2040703182165233019, guid: aa4f1ba608ffa9345a59ba797f26efa5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.74
+      value: 20.54
       objectReference: {fileID: 0}
     - target: {fileID: 2040703182165233019, guid: aa4f1ba608ffa9345a59ba797f26efa5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.18
+      value: 4.02
       objectReference: {fileID: 0}
     - target: {fileID: 2040703182165233019, guid: aa4f1ba608ffa9345a59ba797f26efa5,
         type: 3}
@@ -4870,7 +4879,7 @@ PrefabInstance:
     - target: {fileID: 2040703182165233020, guid: aa4f1ba608ffa9345a59ba797f26efa5,
         type: 3}
       propertyPath: m_Name
-      value: player
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa4f1ba608ffa9345a59ba797f26efa5, type: 3}
@@ -4882,7 +4891,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148578376766}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.033639662, y: 0.013, z: 0.01}
@@ -4953,6 +4962,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: test house
+      objectReference: {fileID: 0}
+    - target: {fileID: 7868438629005614605, guid: fb76885fe3403b64294e156157f4629d,
+        type: 3}
+      propertyPath: m_TagString
+      value: scene swich
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb76885fe3403b64294e156157f4629d, type: 3}
