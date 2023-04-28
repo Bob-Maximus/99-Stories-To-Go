@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Eflatun.SceneReference;
 
 public class EnterableThings : MonoBehaviour
 {
@@ -15,11 +16,11 @@ public class EnterableThings : MonoBehaviour
             {
                 if (levelData.changeLevelData[i].needsInput == false)
                 {
-                    SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name.ToString());
+                    SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.ToString());
                     GameObject.Find("Player").transform.position = levelData.changeLevelData[i].spawnPoint;
                 } else
                 {
-                    enterButton.enabled = true;
+                    enterButton.gameObject.SetActive(true);
                     enterButton.onClick.AddListener(delegate { swichScene(i); });
                 }
             } 
@@ -28,7 +29,8 @@ public class EnterableThings : MonoBehaviour
 
     void  swichScene(int i)
     {
-        SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name.ToString());
-        GameObject.Find("Player").transform.position = levelData.changeLevelData[i].spawnPoint;
+        Scene newScene = SceneManager.GetSceneByName(levelData.changeLevelData[i - 1].newLevel.Name.ToString());
+        SceneManager.MoveGameObjectToScene(GameObject.Find("Player"), newScene);
+        SceneManager.LoadScene(levelData.changeLevelData[i - 1].newLevel.ToString());
     }
 }
