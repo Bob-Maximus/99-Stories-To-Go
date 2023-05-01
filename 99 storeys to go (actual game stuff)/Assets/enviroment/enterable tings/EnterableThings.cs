@@ -29,8 +29,9 @@ public class EnterableThings : MonoBehaviour
 
     void  swichScene(int i)
     {
-        Scene newScene = SceneManager.GetSceneByName(levelData.changeLevelData[i - 1].newLevel.Name.ToString());
+        Debug.Log(i);
+        Scene newScene = SceneManager.GetSceneByName(levelData.changeLevelData[i].newLevel.Name);
         SceneManager.MoveGameObjectToScene(GameObject.Find("Player"), newScene);
-        SceneManager.LoadScene(levelData.changeLevelData[i - 1].newLevel.ToString());
+        SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name);
     }
 }
