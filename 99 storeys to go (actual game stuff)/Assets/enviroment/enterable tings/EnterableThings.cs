@@ -4,8 +4,20 @@ using UnityEngine.UI;
 
 public class EnterableThings : MonoBehaviour
 {
-    public Button enterButton;
+    private Button enterButton;
     public LevelData levelData;
+    private bool isButtonVisible;
+
+    private void Awake()
+    {
+        enterButton = GameObject.Find("Player").transform.Find("UI").transform.Find("click to enter icon").GetComponent<Button>();
+    }
+
+    private void Update()
+    {
+        Debug.Log(isButtonVisible);
+        enterButton.gameObject.SetActive(isButtonVisible);
+    }
 
     public void SwichScene(Collider col)
     {
@@ -16,22 +28,23 @@ public class EnterableThings : MonoBehaviour
                 if (levelData.changeLevelData[i].needsInput == false)
                 {
                     SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name.ToString());
-                    //GameObject.Find("Player").transform.position = levelData.changeLevelData[i].spawnPoint;
                 } else
                 {
-                    enterButton.gameObject.SetActive(true);
-                    enterButton.onClick.AddListener(delegate { swichScene(i - 1); });
+                    isButtonVisible = true;
+                    enterButton.onClick.AddListener(delegate { swichScene(i); });
+                    return;
                 }
             } 
         }
+
+        isButtonVisible = false;
     }
 
     void  swichScene(int i)
     {
-        Scene newScene = SceneManager.GetSceneByName(levelData.changeLevelData[i].newLevel.Name);
-        SceneManager.MoveGameObjectToScene(GameObject.Find("Player"), newScene);
-        SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name);
-        SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name.ToString());
+        isButtonVisible = false;
+        DontDestroyOnLoad(GameObject.Find("Player"));
         GameObject.Find("Player").transform.position = levelData.changeLevelData[i].spawnPoint;
+        SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name);
     }
 }
