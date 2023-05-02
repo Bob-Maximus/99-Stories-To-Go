@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelData", menuName = "Level Data")]
 public class LevelData : ScriptableObject
 {
+    public Sprite backDrop;
     public List<MyClass> changeLevelData;    
 }
 

@@ -7,16 +7,23 @@ public class EnterableThings : MonoBehaviour
     private Button enterButton;
     public LevelData levelData;
     private bool isButtonVisible;
+    private Transform enterButtonFollow;
 
     private void Awake()
     {
         enterButton = GameObject.Find("Player").transform.Find("UI").transform.Find("click to enter icon").GetComponent<Button>();
+        GameObject.Find("background canvas").GetComponentInChildren<SpriteRenderer>().sprite = levelData.backDrop;
     }
 
     private void Update()
     {
         Debug.Log(isButtonVisible);
         enterButton.gameObject.SetActive(isButtonVisible);
+        if (enterButtonFollow != null)
+        {
+            var buttonPos = GameObject.FindGameObjectsWithTag("MainCamera")[0].GetComponent<Camera>().WorldToScreenPoint(enterButtonFollow.position);
+            enterButton.GetComponent<RectTransform>().position = buttonPos;
+        }
     }
 
     public void SwichScene(Collider col)
@@ -25,6 +32,7 @@ public class EnterableThings : MonoBehaviour
         {
             if (col.gameObject.name == levelData.changeLevelData[i].changeLevelTrigger.name)
             {
+                enterButtonFollow = levelData.changeLevelData[i].changeLevelTrigger.transform;
                 if (levelData.changeLevelData[i].needsInput == false)
                 {
                     SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name.ToString());

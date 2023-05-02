@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2694e2804bfb7134c9d3a1dc52848218, type: 3}
   m_Name: test level data
   m_EditorClassIdentifier: 
+  backDrop: {fileID: 21300000, guid: 7eba6621195a9b74b958b0c3f7589d32, type: 3}
   changeLevelData:
   - changeLevelTrigger: {fileID: 7868438629005614605, guid: fb76885fe3403b64294e156157f4629d,
       type: 3}

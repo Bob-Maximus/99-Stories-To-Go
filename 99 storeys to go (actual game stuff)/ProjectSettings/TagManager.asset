@@ -12,6 +12,7 @@ TagManager:
   - inventory slot
   - scene swich
   - scene manager
+  - canvas
   layers:
   - Default
   - TransparentFX
