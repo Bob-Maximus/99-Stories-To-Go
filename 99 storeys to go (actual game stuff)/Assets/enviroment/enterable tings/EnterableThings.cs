@@ -4,10 +4,14 @@ using UnityEngine.UI;
 
 public class EnterableThings : MonoBehaviour
 {
-    private Button enterButton;
     public LevelData levelData;
-    private bool isButtonVisible;
+
+    private Button enterButton;
     private Transform enterButtonFollow;
+    private float iconOffset;
+
+    [HideInInspector]
+    public bool isButtonVisible;
 
     private void Awake()
     {
@@ -17,12 +21,11 @@ public class EnterableThings : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(isButtonVisible);
         enterButton.gameObject.SetActive(isButtonVisible);
         if (enterButtonFollow != null)
         {
             var buttonPos = GameObject.FindGameObjectsWithTag("MainCamera")[0].GetComponent<Camera>().WorldToScreenPoint(enterButtonFollow.position);
-            enterButton.GetComponent<RectTransform>().position = buttonPos;
+            enterButton.GetComponent<RectTransform>().position = new Vector3(buttonPos.x, buttonPos.y + iconOffset, buttonPos.z);
         }
     }
 
@@ -38,14 +41,12 @@ public class EnterableThings : MonoBehaviour
                     SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name.ToString());
                 } else
                 {
+                    iconOffset = levelData.changeLevelData[i].iconOffset * 10;
                     isButtonVisible = true;
-                    enterButton.onClick.AddListener(delegate { swichScene(i); });
-                    return;
+                    enterButton.onClick.AddListener(delegate { swichScene(i - 1); });
                 }
             } 
         }
-
-        isButtonVisible = false;
     }
 
     void  swichScene(int i)

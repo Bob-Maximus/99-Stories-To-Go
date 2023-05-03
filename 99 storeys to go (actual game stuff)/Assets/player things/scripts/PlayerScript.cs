@@ -356,4 +356,13 @@ public class PlayerScript : MonoBehaviour
             sceneManager.SwichScene(other);
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "scene swich")
+        {
+            var sceneManager = GameObject.FindGameObjectsWithTag("scene manager")[0].GetComponent<EnterableThings>();
+            sceneManager.isButtonVisible = false;
+        }
+    }
 }
