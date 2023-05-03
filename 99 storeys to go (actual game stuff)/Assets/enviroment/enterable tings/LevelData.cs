@@ -2,7 +2,7 @@ using Eflatun.SceneReference;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LevelData", menuName = "Level Data")]
+[CreateAssetMenu(fileName = "LevelData", menuName = "scriptable objects/Level Data")]
 public class LevelData : ScriptableObject
 {
     public Sprite backDrop;

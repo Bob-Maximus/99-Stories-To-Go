@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e325f3a8cc41f48ba34d07d4c07bd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraData: {fileID: 11400000, guid: fe6d1265844ba984b9d0c5b5f1ed8dc4, type: 2}
+  cameraData: {fileID: 11400000, guid: aebdf260ff5233d4a9d9a2142579db75, type: 2}
   targets: []
 --- !u!114 &1076665077
 MonoBehaviour:
@@ -875,8 +875,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14b8679bcf3d814ababf6e7d09fc235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enterButton: {fileID: 0}
   levelData: {fileID: 11400000, guid: 5dda35bbdbeaf5246b503b7596b49571, type: 2}
+  isButtonVisible: 0
 --- !u!4 &1496734511
 Transform:
   m_ObjectHideFlags: 0

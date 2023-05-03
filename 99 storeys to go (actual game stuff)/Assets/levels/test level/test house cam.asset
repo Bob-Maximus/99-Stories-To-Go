@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a1038db13dbfa84eb522f00021caea6, type: 3}
-  m_Name: default
+  m_Name: test house cam
   m_EditorClassIdentifier: 
-  CamName: default
+  CamName: camera
   cameraZoom: 7
   zoomLimiter: 6
   cameraHeight: 0.5
@@ -21,8 +21,8 @@ MonoBehaviour:
   maximumZoom: 100
   cameraFollow: []
   addObjectsWithTag: camera focus
-  leftLimit: 0
-  rightLimit: 0
+  leftLimit: 31.53599
+  rightLimit: 17.81
   topLimit: 0
   bottomLimit: 0
   cameraOffset: {x: 0, y: 0.5, z: 7}

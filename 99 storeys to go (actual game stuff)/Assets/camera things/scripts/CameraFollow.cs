@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -36,11 +35,15 @@ public class CameraFollow : MonoBehaviour
 
         Move();
         Zoom();
+        if(cameraData.topLimit != 0 || cameraData.bottomLimit != 0 || cameraData.leftLimit != 0 || cameraData.rightLimit != 0)
+        {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, cameraData.leftLimit, cameraData.rightLimit); Mathf.Clamp(transform.position.y, cameraData.topLimit, cameraData.bottomLimit);)
+        }
     }
 
     private void Zoom()
     {
-        float newZoom = Mathf.Lerp(cameraData.maximumZoom, cameraData.minimumZoom, GetGreatestDistance() / cameraData.zoomLimiter);
+        float newZoom = Mathf.Lerp(cameraData.minimumZoom, cameraData.maximumZoom, GetGreatestDistance() / cameraData.zoomLimiter);
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newZoom, Time.deltaTime * cameraData.cameraSpeed);
     }
 
@@ -81,7 +84,8 @@ public class CameraFollow : MonoBehaviour
                 bounds.Encapsulate(targets[i].transform.position);
             }
         }
-
+       
+        Debug.Log(bounds.center);
         return bounds.center;
     }
 }
