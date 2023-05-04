@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class EnterableThings : MonoBehaviour
@@ -15,8 +16,31 @@ public class EnterableThings : MonoBehaviour
 
     private void Awake()
     {
-        enterButton = GameObject.Find("Player").transform.Find("UI").transform.Find("click to enter icon").GetComponent<Button>();
-        GameObject.Find("background canvas").GetComponentInChildren<SpriteRenderer>().sprite = levelData.backDrop;
+        if (levelData.backDrop != null)
+        {
+            string playerName = "layer";
+            GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>();
+            List<GameObject> playerObjects = new List<GameObject>();
+
+            foreach (GameObject obj in gameObjects)
+            {
+                if (obj.name.Contains("layer"))
+                {
+                    playerObjects.Add(obj);
+                }
+            }
+            enterButton = playerObjects[0].transform.Find("UI").transform.Find("click to enter icon").GetComponent<Button>();
+            Debug.Log(enterButton.ToString());
+            GameObject.Find("background canvas").GetComponentInChildren<SpriteRenderer>().sprite = levelData.backDrop;
+        }
+
+        if (GameObject.Find("Player") == null)
+        {
+            Vector3 spawnPoint;
+            spawnPoint = levelData.changeLevelData[0].spawnPoint;
+            GameObject playerPrefab = Resources.Load<GameObject>("game objects/Player");
+            Instantiate(playerPrefab, spawnPoint, playerPrefab.transform.rotation);
+        }
     }
 
     private void Update()

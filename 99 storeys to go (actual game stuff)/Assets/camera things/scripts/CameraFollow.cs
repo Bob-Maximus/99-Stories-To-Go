@@ -37,7 +37,7 @@ public class CameraFollow : MonoBehaviour
         Zoom();
         if(cameraData.topLimit != 0 || cameraData.bottomLimit != 0 || cameraData.leftLimit != 0 || cameraData.rightLimit != 0)
         {
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, cameraData.leftLimit, cameraData.rightLimit); Mathf.Clamp(transform.position.y, cameraData.topLimit, cameraData.bottomLimit);)
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, cameraData.rightLimit, cameraData.leftLimit), Mathf.Clamp(transform.position.y, cameraData.bottomLimit, cameraData.topLimit), transform.position.z);
         }
     }
 

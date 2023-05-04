@@ -23,6 +23,6 @@ MonoBehaviour:
   addObjectsWithTag: camera focus
   leftLimit: 31.53599
   rightLimit: 17.81
-  topLimit: 0
-  bottomLimit: 0
+  topLimit: 100
+  bottomLimit: -100
   cameraOffset: {x: 0, y: 0.5, z: 7}
