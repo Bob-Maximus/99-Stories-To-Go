@@ -18,29 +18,18 @@ public class EnterableThings : MonoBehaviour
     {
         if (levelData.backDrop != null)
         {
-            string playerName = "layer";
-            GameObject[] gameObjects = GameObject.FindObjectsOfType<GameObject>();
-            List<GameObject> playerObjects = new List<GameObject>();
-
-            foreach (GameObject obj in gameObjects)
-            {
-                if (obj.name.Contains("layer"))
-                {
-                    playerObjects.Add(obj);
-                }
-            }
-            enterButton = playerObjects[0].transform.Find("UI").transform.Find("click to enter icon").GetComponent<Button>();
-            Debug.Log(enterButton.ToString());
             GameObject.Find("background canvas").GetComponentInChildren<SpriteRenderer>().sprite = levelData.backDrop;
         }
 
         if (GameObject.Find("Player") == null)
         {
-            Vector3 spawnPoint;
-            spawnPoint = levelData.changeLevelData[0].spawnPoint;
+            GameObject[] swichSceneCols = new GameObject[0];
+            swichSceneCols = GameObject.FindGameObjectsWithTag("scene swich");
             GameObject playerPrefab = Resources.Load<GameObject>("game objects/Player");
-            Instantiate(playerPrefab, spawnPoint, playerPrefab.transform.rotation);
+            var player = Instantiate(playerPrefab, new Vector3(swichSceneCols[0].transform.position.x, swichSceneCols[0].transform.position.y, playerPrefab.transform.position.z), playerPrefab.transform.rotation);
+            player.name = "Player";
         }
+        enterButton = GameObject.Find("Player").transform.Find("UI").transform.Find("click to enter icon").GetComponent<Button>();
     }
 
     private void Update()
@@ -62,7 +51,7 @@ public class EnterableThings : MonoBehaviour
                 enterButtonFollow = levelData.changeLevelData[i].changeLevelTrigger.transform;
                 if (levelData.changeLevelData[i].needsInput == false)
                 {
-                    SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name.ToString());
+                    swichScene(i);
                 } else
                 {
                     iconOffset = levelData.changeLevelData[i].iconOffset * 10;
@@ -78,6 +67,7 @@ public class EnterableThings : MonoBehaviour
         isButtonVisible = false;
         DontDestroyOnLoad(GameObject.Find("Player"));
         GameObject.Find("Player").transform.position = levelData.changeLevelData[i].spawnPoint;
+        Debug.Log(levelData.changeLevelData[i].spawnPoint);
         SceneManager.LoadScene(levelData.changeLevelData[i].newLevel.Name);
     }
 }

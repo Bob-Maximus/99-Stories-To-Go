@@ -15,7 +15,8 @@ MonoBehaviour:
   backDrop: {fileID: 0}
   changeLevelData:
   - iconOffset: 0
-    changeLevelTrigger: {fileID: 0}
+    changeLevelTrigger: {fileID: 5722950846159919463, guid: 391ef24f799988f47b61437cd69d4e54,
+      type: 3}
     spawnPoint: {x: 24.7, y: 4.02, z: 0}
     newLevel:
       asset: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
