@@ -141,15 +141,19 @@ public class PlayerScript : MonoBehaviour
 
     private bool Aim()
     {
+        RaycastHit rayInFront;
+        Physics.Raycast(gunPos.transform.position, gunPos.transform.forward, out rayInFront, Mathf.Infinity);
+        Transform oldGunPos = gunPos.transform;
+
         if (inventoryManager.GetSelectedItem() != null) {
             if (inventoryManager.GetSelectedItem().isRanged == true && inventoryManager.GetSelectedItem().type.ToString() == "weapon")
             {
+                gunPos.transform.LookAt(rayInFront.point);
                 if (aiming == true)
                 {
                     if (isMoving == false)
                     {
                         PlayAnimation("aim idle");
-                        gunPos.transform.LookAt();
                     }
 
                     return true;
@@ -161,6 +165,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
+                gunPos.transform.rotation = oldGunPos.transform.rotation;
                 return true;
             }
         } else
