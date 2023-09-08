@@ -149,6 +149,7 @@ public class PlayerScript : MonoBehaviour
                     if (isMoving == false)
                     {
                         PlayAnimation("aim idle");
+                        gunPos.transform.LookAt();
                     }
 
                     return true;
