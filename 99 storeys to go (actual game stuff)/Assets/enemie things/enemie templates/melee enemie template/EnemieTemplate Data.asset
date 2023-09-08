@@ -24,4 +24,5 @@ MonoBehaviour:
   attackLayer:
   - serializedVersion: 2
     m_Bits: 64
+  drops: []
   isMelee: 1
