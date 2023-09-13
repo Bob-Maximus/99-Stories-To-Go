@@ -141,37 +141,58 @@ public class PlayerScript : MonoBehaviour
 
     private bool Aim()
     {
-        RaycastHit rayInFront;
-        Physics.Raycast(gunPos.transform.position, gunPos.transform.forward, out rayInFront, Mathf.Infinity);
-        Transform oldGunPos = gunPos.transform;
+        if (IsGrounded())
+        {
+            RaycastHit rayInFront;
+            Physics.Raycast(gunPos.transform.position, gunPos.transform.forward, out rayInFront, Mathf.Infinity);
+            Transform oldGunPos = gunPos.transform;
 
-        if (inventoryManager.GetSelectedItem() != null) {
-            if (inventoryManager.GetSelectedItem().isRanged == true && inventoryManager.GetSelectedItem().type.ToString() == "weapon")
+            if (inventoryManager.GetSelectedItem() != null)
             {
-                gunPos.transform.LookAt(rayInFront.point);
-                if (aiming == true)
+                if (inventoryManager.GetSelectedItem().isRanged == true && inventoryManager.GetSelectedItem().type.ToString() == "weapon")
                 {
-                    if (isMoving == false)
+                    if (aiming == true)
                     {
-                        PlayAnimation("aim idle");
-                    }
+                        if (isMoving == false)
+                        {
+                            PlayAnimation("aim idle");
+                        }
 
-                    return true;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
             }
             else
             {
-                gunPos.transform.rotation = oldGunPos.transform.rotation;
-                return true;
+                return false;
             }
         } else
         {
             return false;
         }
+    }
+
+    float GetAnimationClipLength(string animName)
+    {
+        var anim = GetComponentInChildren<Animator>();
+
+        for (int i = 0; i < 99999;)
+        {
+            if (anim.runtimeAnimatorController.animationClips[i].name == animName)
+            {
+                return anim.runtimeAnimatorController.animationClips[i].length;
+            }
+        }
+        Debug.LogError("skiped the for loops when checking " + animName + "'s length, whoops!");
+        return 0;
     }
 
     private void Use()
@@ -185,6 +206,14 @@ public class PlayerScript : MonoBehaviour
                 
                 if (timeSinceLastShot > gunData.fireRate)
                 {
+                    float timeSinceAnimStart = 0;
+                    timeSinceAnimStart += Time.deltaTime;
+                    PlayAnimation("use");
+                    if (timeSinceAnimStart >= GetAnimationClipLength("use"))
+                    {
+                        Debug.Log("use animation ended. What now?");
+                    }
+
                     RaycastHit gunRayHit;
 
                     if (Physics.Raycast(gun.transform.position, gun.transform.forward, out gunRayHit, gunData.distance, LayerMask.GetMask("Enemy")) || 
@@ -207,6 +236,7 @@ public class PlayerScript : MonoBehaviour
                             gunRayHit.collider.gameObject.GetComponentInParent<Rigidbody>().AddForce(gunData.knockBack * 70 * forceDir, 20, 0);
                         }
                     }
+                    timeSinceLastShot = 0;
                 }
             }
             else if (inventoryManager.GetSelectedItem().type.ToString() == "consumable")
@@ -254,7 +284,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (currentState == newState)
         {
-            //isPlayingAnim = false;
             return;
         }
         anim.Play(newState);
@@ -344,7 +373,7 @@ public class PlayerScript : MonoBehaviour
             }
             else if (rb.velocity.y > 0.2)
             {
-                PlayAnimation("falling");
+                PlayAnimation("going up");
             }
         }
 
