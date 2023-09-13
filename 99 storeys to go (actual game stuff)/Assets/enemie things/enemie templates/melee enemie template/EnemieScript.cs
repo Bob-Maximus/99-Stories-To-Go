@@ -85,7 +85,10 @@ public class EnemieScript : MonoBehaviour
             PlayAnimation("idle");
         }
         rb.velocity = new Vector3(moveDir * enemyData.speed, rb.velocity.y, rayHit.point.z);
-        PlayAnimation("walking");
+        if (!attacking)
+        {
+            PlayAnimation("walking");
+        }
     }
 
     private bool IsGrounded()
