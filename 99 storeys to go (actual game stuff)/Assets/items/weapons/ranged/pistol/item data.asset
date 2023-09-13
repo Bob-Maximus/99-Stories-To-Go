@@ -23,7 +23,7 @@ MonoBehaviour:
   damage: 20
   knockBack: 10
   distance: 100
-  fireRate: 5
+  fireRate: 0.1
   isRanged: 1
   magSize: 8
   reloadSpeed: 3

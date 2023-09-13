@@ -184,7 +184,7 @@ public class PlayerScript : MonoBehaviour
     {
         var anim = GetComponentInChildren<Animator>();
 
-        for (int i = 0; i < 99999;)
+        for (int i = 0; i < 100;)
         {
             if (anim.runtimeAnimatorController.animationClips[i].name == animName)
             {
@@ -206,13 +206,7 @@ public class PlayerScript : MonoBehaviour
                 
                 if (timeSinceLastShot > gunData.fireRate)
                 {
-                    float timeSinceAnimStart = 0;
-                    timeSinceAnimStart += Time.deltaTime;
                     PlayAnimation("use");
-                    if (timeSinceAnimStart >= GetAnimationClipLength("use"))
-                    {
-                        Debug.Log("use animation ended. What now?");
-                    }
 
                     RaycastHit gunRayHit;
 

@@ -19,6 +19,8 @@ public class EnemyData : ScriptableObject
     public List<LayerMask> attackLayer;
     public List<ItemData> drops;
 
+    public AnimatorOverrideController animOverrides;
+
     [HideInInspector]
     public bool isMelee = true;
 }

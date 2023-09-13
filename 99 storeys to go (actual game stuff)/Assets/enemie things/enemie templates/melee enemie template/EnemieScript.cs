@@ -6,6 +6,7 @@ public class EnemieScript : MonoBehaviour
 {
     private Rigidbody rb;
     private CurrentHealth CurrentHealth;
+    private Animator anim;
 
     private RaycastHit rayHit;
     private RaycastHit rayHitEnemy;
@@ -17,11 +18,14 @@ public class EnemieScript : MonoBehaviour
     private float timePaused;
     private float waitSecondsRand;
     private float moveDir = 0;
+    private string currentState;
+    private bool attacking;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         CurrentHealth = GetComponent<CurrentHealth>();
+        anim = GetComponent<Animator>();
 
         CurrentHealth.currentHealth = enemyData.maxHealth;
     }
@@ -76,8 +80,12 @@ public class EnemieScript : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(rb.rotation.x, 0f, rb.rotation.z);
             facingRight = true;
+        } else if (moveDir == 0 && !attacking)
+        {
+            PlayAnimation("idle");
         }
         rb.velocity = new Vector3(moveDir * enemyData.speed, rb.velocity.y, rayHit.point.z);
+        PlayAnimation("walking");
     }
 
     private bool IsGrounded()
@@ -119,14 +127,19 @@ public class EnemieScript : MonoBehaviour
 
     private void CheckIfCanAttack()
     {
-        if (Vector3.Distance(rayHitEnemy.point, transform.position) <= enemyData.attachrange)
+        if (Vector3.Distance(rayHitEnemy.point, transform.position) <= enemyData.attachrange && SeesPlayer())
         {
+            attacking = true;
             Attack();
+        } else
+        {
+            attacking = false;
         }
     }
 
     private void Attack()
     {
+        PlayAnimation("use");
         Move(0);
         rayHitEnemy.rigidbody.AddForce(enemyData.knockBack * 50 * moveDir, 1, 0);
         if (rayHitEnemy.collider.gameObject.GetComponent<CurrentHealth>() != null)
@@ -162,6 +175,16 @@ public class EnemieScript : MonoBehaviour
         }
 
         Move(moveDir / 2);
+    }
+
+    private void PlayAnimation(string newState)
+    {
+        if (currentState == newState)
+        {
+            return;
+        }
+        anim.Play(newState);
+        currentState = newState;
     }
 
     private void Die()
